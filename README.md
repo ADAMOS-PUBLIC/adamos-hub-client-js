@@ -1,1 +1,1 @@
-# adamos-hub-js
+# adamos-hub-client-js
