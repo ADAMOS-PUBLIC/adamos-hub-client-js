@@ -22,13 +22,19 @@ class Client {
         if (!client_secret) {
             throw new Error(`Missing parameter 'client_secret'!`)
         }
-        let token = await http.getToken(client_id, client_secret)
 
-        return new Client({
-            access_token: token.access_token, 
-            environment, 
-            baseURL
-        })
+        try {
+            let token = await http.getToken(client_id, client_secret)
+    
+            return new Client({
+                access_token: token.access_token, 
+                environment, 
+                baseURL
+            })
+        } catch (error) {
+            console.error(error);
+            console.error('Failed getting access_token!');
+        }
     }
 }
 
