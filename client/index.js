@@ -32,6 +32,9 @@ class Client {
     setTenantId(tenantId) {
         http.setTenantIdHeader(tenantId)
     }
+    setAccessToken(access_token) {
+        http.setAuthHeader(access_token)
+    }
 
     static async build({client_id, client_secret, tenantId, environment, baseURL}) {
         if (!client_id) {
