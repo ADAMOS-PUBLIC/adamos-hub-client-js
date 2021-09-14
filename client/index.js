@@ -7,15 +7,17 @@ const Catalog = require('../lib/controllers/catalog')
 const Runstate = require('../lib/controllers/runstate')
 
 class Client {
-    constructor({access_token, tenantId, environment, baseURL}) {
+    constructor({access_token, isM2M, tenantId, environment, baseURL}) {
         if (!access_token) {
             throw new Error(`Missing parameter 'access_token'!`)
         }
-        checkTenantId(tenantId)
+        if (isM2M) {
+            checkTenantId(tenantId)
+            http.setTenantIdHeader(tenantId)
+        }
 
         http.setEnvironment(environment)
         http.setAuthHeader(access_token)
-        http.setTenantIdHeader(tenantId)
 
         this.mdm = new MDM()
         this.permission = new Permission()
@@ -44,6 +46,7 @@ class Client {
     
             return new Client({
                 access_token: token.access_token, 
+                isM2M: true,
                 tenantId,
                 environment, 
                 baseURL
