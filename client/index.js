@@ -7,7 +7,7 @@ const Catalog = require('../lib/controllers/catalog')
 const Runstate = require('../lib/controllers/runstate')
 
 class Client {
-    constructor({access_token, isM2M, tenantId, environment, baseURL}) {
+    constructor({access_token, isM2M, tenantId, environment, baseURL, apiVersions}) {
         if (!access_token) {
             throw new Error(`Missing parameter 'access_token'!`)
         }
@@ -18,12 +18,15 @@ class Client {
 
         http.setEnvironment(environment)
         http.setAuthHeader(access_token)
+        http.setBaseUrl(baseURL)
 
-        this.mdm = new MDM()
-        this.permission = new Permission()
-        this.event = new Event()
-        this.catalog = new Catalog()
-        this.runstate = new Runstate()
+        apiVersions = apiVersions || getDefaultVersions()
+
+        this.mdm = new MDM(apiVersions.mdm)
+        this.permission = new Permission(apiVersions.permission)
+        this.event = new Event(apiVersions.event)
+        this.catalog = new Catalog(apiVersions.catalog)
+        this.runstate = new Runstate(apiVersions.runstate)
     }
 
     setEnvironment(environment) {
@@ -69,5 +72,15 @@ function checkTenantId(tenantId) {
             `Warning: No tenant ID specified! 
             Most endpoints (e.g. MDM) require a tenant ID when usnig a client_credentials token.`
         )
+    }
+}
+
+function getDefaultVersions() {
+    return {
+        mdm: 'v0.5',
+        permission: 'v0.1',
+        event: 'v0.1',
+        catalog: 'v0.6',
+        runstate: 'v0.1',
     }
 }
