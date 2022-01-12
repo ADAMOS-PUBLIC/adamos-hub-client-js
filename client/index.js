@@ -38,6 +38,9 @@ class Client {
     setAccessToken(access_token) {
         http.setAuthHeader(access_token)
     }
+    addHttpHeader(key, value) {
+        http.addHeader(key, value)
+    }
 
     static async build({client_id, client_secret, tenantId, environment, baseURL}) {
         if (!client_id) {
