@@ -80,7 +80,7 @@ function checkTenantId(tenantId) {
 
 function getDefaultVersions() {
     return {
-        mdm: 'v0.5',
+        mdm: 'v1',
         permission: 'v0.1',
         event: 'v0.1',
         catalog: 'v0.6',
