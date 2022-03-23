@@ -82,8 +82,8 @@ function getDefaultVersions() {
     return {
         mdm: 'v1',
         permission: 'v0.1',
-        event: 'v0.1',
-        catalog: 'v0.6',
-        runstate: 'v0.1',
+        event: 'v1',
+        catalog: 'v1',
+        runstate: 'v1',
     }
 }
