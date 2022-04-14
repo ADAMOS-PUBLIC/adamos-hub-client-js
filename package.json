@@ -1,6 +1,6 @@
 {
   "name": "@adamos/hub-client",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "description": "JS Client SDK for the ADAMOS HUB API",
   "main": "index.js",
   "author": "Pavel Nikolov <pavel.nikolov@adamos.com>",
